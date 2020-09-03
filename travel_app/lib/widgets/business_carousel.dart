@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travel_app/models/business_model.dart';
 
 class BusinessCarousel extends StatelessWidget {
@@ -23,7 +24,7 @@ class BusinessCarousel extends StatelessWidget {
                 onTap: () => print('See All'),
                 child: Text("See All",
                     style: TextStyle(
-                      color: Colors.red[300],
+                      color: Colors.blue[300],
                       fontSize: 16.0,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 1.0,
@@ -34,7 +35,6 @@ class BusinessCarousel extends StatelessWidget {
         ),
         Container(
             height: 300.0,
-            color: Colors.grey,
             child: ListView.builder(
                 // Connect to the backend here
                 scrollDirection: Axis.horizontal,
@@ -44,28 +44,95 @@ class BusinessCarousel extends StatelessWidget {
                   return Container(
                       margin: EdgeInsets.all(10.0),
                       width: 210.0,
-                      color: Colors.red,
                       child: Stack(
+                        alignment: Alignment.topCenter,
                         children: <Widget>[
-                          Container(
-                            height: 120.0,
-                            width: 200.0,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10.0),
+                          Positioned(
+                            bottom: 15.0,
+                            child: Container(
+                              height: 120.0,
+                              width: 200.0,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      '${business.activities.length} activities',
+                                      style: TextStyle(
+                                        fontSize: 22.0,
+                                        fontWeight: FontWeight.w600,
+                                        letterSpacing: 1.2,
+                                      ),
+                                    ),
+                                    Text(business.description,
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                        )),
+                                  ],
+                                ),
+                              ),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black26,
+                                      offset: Offset(0.0, 2.0),
+                                      blurRadius: 6.0)
+                                ]),
+                            child: Stack(
                               children: <Widget>[
-                                Text(
-                                  '${business.activities.length} activities',
-                                  style: TextStyle(
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 1.2,
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: Image(
+                                    height: 180.0,
+                                    width: 180.0,
+                                    image: AssetImage(business.imageUrl),
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                                Text(business.description),
+                                Positioned(
+                                  left: 10.0,
+                                  bottom: 10.0,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        business.city,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 24.0,
+                                          fontWeight: FontWeight.w600,
+                                          letterSpacing: 1.2,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            FontAwesomeIcons.locationArrow,
+                                            size: 10.0,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(width: 5.0),
+                                          Text(business.country,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           )
